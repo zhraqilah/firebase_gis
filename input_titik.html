@@ -1,10 +1,19 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Fixed top navbar example · Bootstrap v5.0</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
+        position: static;
+        overflow: inherit;
         height: 100%;
+        
+        /* top: 55px; */
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -12,11 +21,53 @@
         margin: 0;
         padding: 0;
       }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body> 
+   
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Peta Kebakaran</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Input Titik</a>
+            </li>            
+          </ul>             
+        </div>
+      </div>
+    </nav>
+    <main class="container mt-5">
+      <div class="bg-light p-4 rounded">
+        <h1>Input Lokasi Kebakaran</h1>
+        <p class="lead">Tambahkan koordinat lokasi kebakaran dengan cara klik pada titik kejadian pada peta di bawah ini, 
+          selanjutnya simpan titik koordinat tersebut dengan memilih OK pada pesan notifikasi</p>            
+      </div>
+    </main>
+      
+    <div id="map"></div>
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
@@ -25,13 +76,13 @@
  * Firebase config block.
  */
 var config = {
-apiKey: "AIzaSyDV6AS1oeDU9z0uO_qM9M5TO-wFr64OBrw",
-  authDomain: "belajar-4e4f8.firebaseapp.com",
-  databaseURL: "https://belajar-4e4f8.firebaseio.com",
-  projectId: "belajar-4e4f8",
-  storageBucket: "belajar-4e4f8.appspot.com",
-  messagingSenderId: "315893487502",
-  appId: "1:315893487502:web:21a783cc37f1cedef376df"
+  apiKey: "AIzaSyDV6AS1oeDU9z0uO_qM9M5TO-wFr64OBrw",
+    authDomain: "belajar-4e4f8.firebaseapp.com",
+    databaseURL: "https://belajar-4e4f8.firebaseio.com",
+    projectId: "belajar-4e4f8",
+    storageBucket: "belajar-4e4f8.appspot.com",
+    messagingSenderId: "315893487502",
+    appId: "1:315893487502:web:21a783cc37f1cedef376df"
 };
 
 firebase.initializeApp(config);
@@ -88,8 +139,8 @@ function makeInfoBox(controlDiv, map) {
        */
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 0, lng: 0},
-          zoom: 3,
+          center:{ lat: -5.143605142193621, lng: 119.40739631652832 },
+          zoom: 5,
           styles: [{
             featureType: 'poi',
             stylers: [{ visibility: 'off' }]  // Turn off POI.
@@ -112,7 +163,10 @@ function makeInfoBox(controlDiv, map) {
         map.addListener('click', function(e) {
           data.lat = e.latLng.lat();
           data.lng = e.latLng.lng();
-          addToFirebase(data);
+          let teks = prompt("Tambahkan Teks Label:");
+          addToFirebase(data, teks);
+          
+          
         });
 
         // Create a heatmap.
@@ -202,10 +256,12 @@ function makeInfoBox(controlDiv, map) {
        * @param {Object} data The data to be added to firebase.
        *     It contains the lat, lng, sender and timestamp.
        */
-      function addToFirebase(data) {
+      function addToFirebase(data, teks) {
         getTimestamp(function(timestamp) {
           // Add the new timestamp to the record data.
           data.timestamp = timestamp;
+          data.datetime = new Date().toLocaleString();
+          data.label = teks
           var ref = firebase.database().ref('clicks').push(data, function(err) {
             if (err) {  // Data was not written to firebase.
               console.warn(err);
@@ -215,10 +271,7 @@ function makeInfoBox(controlDiv, map) {
       }
     </script>
     <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM1TZxBco8eK-7ljp3xpmlZanGf6acbrQ&libraries=visualization&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEIgrHazuTjwXUZqVBo4nDB73VRrY-oQw&libraries=visualization&callback=initMap">
     </script>
-     <!-- <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfr7yGlGQkP5A76aQVTi17TCmPqVl4sZE&libraries=visualization&callback=initMap">
-    </script> -->
   </body>
 </html>
