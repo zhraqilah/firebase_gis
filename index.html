@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -9,40 +9,57 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Peta Kebakaran</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>         
-          </ul>             
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background:linear-gradient(to left, #FFC11F, #F33C04);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Peta Kebakaran</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>         
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="dashboard.html">Dashboard</a>
+                    </li>         
+                </ul>             
+            </div>
         </div>
-      </div>
     </nav>
     <main class="container mt-5">
-      <div class="bg-light p-4 rounded">
-        <div class="row">
-          <div class="col-12">
-            <h1>Lokasi Kebakaran</h1>
-            <p class="lead">Peta ini menampilkan titik-titik lokasi kebakaran yang tersebar di seluruh wilayah Indonesia </p>
-          </div>
-        </div>
-         <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body" id="titikTxt"></div>
-                    <div class="card-footer small">
-                       Total Lokasi Kebakaran
-                    </div>
+        <div class="bg-light p-4 rounded">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Lokasi Kebakaran</h1>
+                    <p class="lead">Peta ini menampilkan titik-titik lokasi kebakaran yang tersebar di seluruh wilayah Indonesia </p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card text-white mb-4" style="background:#F33C04">
+                        <div class="card-body" id="titikTxt"></div>
+                        <div class="card-footer small">
+                            Total Lokasi Kebakaran
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-xl-3 col-md-6">
+                  <div class="card text-white mb-4" style="background:#F33C04">
+                        <div class="card-body" id="titikTxtBulan1"></div>
+                        <div class="card-footer small" id="labelBulan1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card text-white mb-4" style="background:#F33C04">
+                        <div class="card-body" id="titikTxtBulan2"></div>
+                        <div class="card-footer small" id="labelBulan2">
+                        </div>
+                    </div>
+                </div> -->
             <!-- <div class="col-xl-3 col-md-6">
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body">Warning Card</div>
@@ -72,38 +89,39 @@
             </div> -->
         </div>
 
-              
-      </div>
 
-    </main>
-    <div id="map"></div>
-     <main class="container my-4">
-      <h2>Daftar Lokasi Kebakaran</h2>
-      <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Waktu</th>
-          <th scope="col">Label</th>
-          <th scope="col">Latitude</th>
-          <th scope="col">Longitude</th>
-          <th scope="col">Timestamp</th>
-        </tr>
-      </thead>
-      <tbody id="tabelMap">
-      </tbody>
+    </div>
+
+</main>
+<div id="map"></div>
+<main class="container my-4 mt-5 ">
+    <h2>Daftar Lokasi Kebakaran</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Waktu</th>
+                <th scope="col">Latitude</th>
+                <th scope="col">Longitude</th>
+                <th scope="col">Wilayah</th>
+                <th scope="col">Detail</th>
+            </tr>
+        </thead>
+        <tbody id="tabelMap">
+        </tbody>
     </table> 
-     </main>
-         
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
-    <script src="./index.js"></script>
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM1TZxBco8eK-7ljp3xpmlZanGf6acbrQ&callback=initMap&v=weekly"
-      async
-    ></script>
-  </body>
+</main>
+
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/dist/js/moment.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+<script src="./index.js"></script>
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MgLuZuyqR_OGY3ob3M52N46TDBRI_9k&callback=initMap&v=weekly"
+async
+></script>
+</body>
 </html>
