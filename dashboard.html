@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Peta Kebakaran</title>
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background:linear-gradient(to left, #FFC11F, #F33C04);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Peta Kebakaran</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="index.html">Home</a>
+          </li>         
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="dashboard.html">Dashboard</a>
+          </li>         
+        </ul>             
+      </div>
+    </div>
+  </nav>
+  <main class="container mt-5">
+    <div class="bg-light p-4 rounded">
+      <div class="row">
+        <div class="col-12">
+          <h1>Dashboard</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-xl-6 col-md-6">
+            <div class="card text-white mb-4" style="background:#f33c04">
+              <div class="mx-4 mt-3">Filter</div>
+              <div class="card-body small d-flex">
+                <select name="filterYear" id="filterYear" class="form-control mx-2">
+                  <option value="" selected>Pilih Tahun</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                </select>
+                <select name="filterMonth" id="filterMonth" class="form-control mx-2">
+                  <option value="" selected>Pilih Bulan</option>
+                  <option value="1">Januari</option>
+                  <option value="2">Februari</option>
+                  <option value="3">Maret</option>
+                  <option value="4">April</option>
+                  <option value="5">Mei</option>
+                  <option value="6">Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">Agustus</option>
+                  <option value="9">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">Desember</option>
+                </select>
+                <button type="button" id="filterButton" class="btn btn-info text-white">Cari</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-3 d-none total-filter">
+            <div class="card text-white mb-4" style="background:#f33c04">
+              <div class="mx-4 mt-2">Total Pencarian Kebakaran</div>
+              <div class="card-body">
+                <h3 class="total-filter-h3"></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="listCard row">
+        </div>
+        <table class="table table-striped d-none my-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Waktu</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Wilayah</th>
+                    <th scope="col">Opsi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelMap">
+            </tbody>
+        </table> 
+        <div class="col-xl-12 col-md-12" id="canvasChart"></div>
+      </div>
+
+
+    </div>
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="assets/dist/js/moment.js"></script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+  <script src="./dashboard.js"></script>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MgLuZuyqR_OGY3ob3M52N46TDBRI_9k&callback=initMap&v=weekly"
+  async
+  ></script>
+</body>
+</html>
