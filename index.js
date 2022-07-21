@@ -53,8 +53,9 @@ function getReverseGeocodingData(lat, lng) {
         let one_time = one_location.timestamp
         let one_label = one_location.label
         let one_waktu = one_location.datetime
-        let suhu = one_location.suhu
-        let terdeteksi = one_location.terdeteksi
+        let Suhu = one_location.Suhu
+        let Kelembapan = one_location.Kelembaban
+        let Terdeteksi_api = one_location.Terdeteksi_api
 
         let date_split1 = one_waktu.split(" ")[0]
         let date_split2 = date_split1.split("/")[1]+"/"+date_split1.split("/")[0]+"/"+date_split1.split("/")[2]
@@ -88,8 +89,9 @@ function getReverseGeocodingData(lat, lng) {
           lat : one_lat,
           lng : one_lng,
           area : area,
-          suhu : suhu,
-          terdeteksi : terdeteksi
+          Suhu : Suhu,
+          Kelembapan : Kelembapan,
+          Terdeteksi_api : Terdeteksi_api
         });
         locations_new.push({
           lat:one_lat,lng:one_lng
@@ -145,8 +147,9 @@ function getReverseGeocodingData(lat, lng) {
     const info_text = label_time[i % label_time.length].label;
     const info_waktu = label_time[i % label_time.length].waktu;
     const info_area = label_time[i % label_time.length].area;
-    const info_suhu = label_time[i % label_time.length].suhu ? label_time[i % label_time.length].suhu : 0;
-    const info_terdeteksi = label_time[i % label_time.length].terdeteksi ? label_time[i % label_time.length].terdeteksi : "Ya";
+    const info_suhu = label_time[i % label_time.length].Suhu ? label_time[i % label_time.length].Suhu : 0;
+    const info_kelembapan = label_time[i % label_time.length].Kelembapan ? label_time[i % label_time.length].Kelembapan : 0;
+    const info_terdeteksi = label_time[i % label_time.length].Terdeteksi_api ? label_time[i % label_time.length].Terdeteksi_api : "Ya";
     
     const label = String(i+1);
     // console.log(info_waktu > )
@@ -160,7 +163,8 @@ function getReverseGeocodingData(lat, lng) {
     '<div id="bodyContent">' +
     "<h6>Waktu Kebakaran : "+info_waktu+"</h6>" +
     "<h6>Wilayah Kebakaran : "+info_area+"</h6>" +
-    "<h6>Suhu/Kelembapan : "+info_suhu+"</h6>" +
+    "<h6>Suhu : "+info_suhu+"</h6>" +
+    "<h6>Kelembapan : "+info_kelembapan+"</h6>" +
     "<h6>Terdeteksi API : "+info_terdeteksi+"</h6>" +
     // '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
     // "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
